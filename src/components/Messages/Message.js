@@ -1,30 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { Comment, Image } from "semantic-ui-react";
+import UserModal from "../Modal";
 
 const isOwnMessage = (message, user) => {
   return message.user.id === user.uid ? "message__self" : "";
 };
 
-const isImage = message => {
+const isImage = (message) => {
   return message.hasOwnProperty("image") && !message.hasOwnProperty("content");
 };
 
-const timeFromNow = timestamp => moment(timestamp).fromNow();
+const timeFromNow = (timestamp) => moment(timestamp).fromNow();
 
-const Message = ({ message, user }) => (
-  <Comment>
-    <Comment.Avatar src={message.user.avatar} />
-    <Comment.Content className={isOwnMessage(message, user)}>
-      <Comment.Author as="a">{message.user.name}</Comment.Author>
-      <Comment.Metadata>{timeFromNow(message.timestamp)}</Comment.Metadata>
-      {isImage(message) ? (
-        <Image src={message.image} className="message__image" />
-      ) : (
-        <Comment.Text>{message.content}</Comment.Text>
-      )}
-    </Comment.Content>
-  </Comment>
-);
+const generate = (msg) => {
+  var expression =
+    /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+  var regex = new RegExp(expression);
+  if (msg.match(regex)) {
+    return (
+      <a href={msg} target="_blank" rel="noopener noreferrer">
+        {msg}
+      </a>
+    );
+  }
+  return msg;
+};
+
+const Message = ({ message, user }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <React.Fragment>
+      <Comment>
+        <Comment.Avatar src={message.user.avatar} />
+        <Comment.Content className={isOwnMessage(message, user)}>
+          <Comment.Author as="a">{message.user.name}</Comment.Author>
+          <Comment.Metadata>{timeFromNow(message.timestamp)}</Comment.Metadata>
+          {isImage(message) ? (
+            <Image
+              src={message.image}
+              className="message__image"
+              onClick={() => setOpen(!open)}
+            />
+          ) : (
+            <Comment.Text>{generate(message.content)}</Comment.Text>
+          )}
+        </Comment.Content>
+      </Comment>
+      <UserModal
+        open={open}
+        closeModal={() => setOpen(false)}
+        img={message.image}
+      />
+    </React.Fragment>
+  );
+};
 
 export default Message;
