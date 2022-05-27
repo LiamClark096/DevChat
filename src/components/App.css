@@ -5,14 +5,28 @@ body,
   background: #eee;
   padding: 1em;
 }
+ul {
+  list-style: none;
+}
 
 /* SidePanel.js */
+.sideBar {
+  border-right: 1px solid #292354;
+}
+.starredBox {
+  color: white;
+}
 .menu {
-  padding-bottom: 2em;
+  color: white;
+  padding: 10px;
+  margin: 0;
+}
+.menu li {
+  margin: 1rem 0;
+  cursor: pointer;
 }
 .ui.grid {
   background: #120e28 !important;
-  /* background: #814bf6!important; */
 }
 .ui.segment {
   background: rgb(38 38 38);
@@ -26,7 +40,7 @@ body,
   max-width: 100% !important;
 }
 .boxcolor {
-  background-color: #292354!important;
+  background-color: #292354 !important;
 }
 
 /* MessageForm.js */
@@ -88,6 +102,7 @@ body,
   font-style: italic;
   font-weight: bold;
   margin-right: 3px;
+  color: white;
 }
 
 .typing {
