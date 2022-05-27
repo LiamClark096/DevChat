@@ -8,6 +8,19 @@ body,
 ul {
   list-style: none;
 }
+.message_form {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px!important;
+}
+.msg_input {
+  display: flex;
+  flex-grow: 2;
+}
 
 /* SidePanel.js */
 .sideBar {
