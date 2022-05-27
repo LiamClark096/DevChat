@@ -11,6 +11,15 @@ body {
 ul {
   list-style: none;
 }
+.emoji-mart {
+  position: absolute !important;
+  bottom: 5rem !important;
+}
+.activeMsg {
+  border: 1px solid #591bdf;
+  border-radius: 5px;
+  padding: 5px;
+}
 .message_form {
   display: flex;
   flex-direction: row;

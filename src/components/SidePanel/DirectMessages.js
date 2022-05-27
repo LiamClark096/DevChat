@@ -119,6 +119,9 @@ class DirectMessages extends React.Component {
               active={user.uid === activeChannel}
               onClick={() => this.changeChannel(user)}
               style={{ opacity: 0.7, fontStyle: "italic" }}
+              className={
+                user.uid === this.state.activeChannel ? "activeMsg" : ""
+              }
             >
               <Icon
                 name="circle"

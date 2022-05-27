@@ -186,7 +186,7 @@ class Channels extends React.Component {
         onClick={() => this.changeChannel(channel)}
         name={channel.name}
         style={{ opacity: 0.7 }}
-        active={channel.id === this.state.activeChannel}
+        className={channel.id === this.state.activeChannel ? "activeMsg" : ""}
       >
         {this.getNotificationCount(channel) && (
           <Label color="red">{this.getNotificationCount(channel)}</Label>
