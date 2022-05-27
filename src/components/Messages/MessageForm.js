@@ -209,7 +209,7 @@ class MessageForm extends React.Component {
     const { errors, message, loading, modal, uploadState, percentUploaded, emojiPicker } = this.state;
 
     return (
-      <Segment className="message__form">
+      <Segment className="message__form boxcolor">
         {emojiPicker && (
           <Picker
             set="apple"
