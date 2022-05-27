@@ -14,20 +14,20 @@ class MessagesHeader extends React.Component {
     } = this.props;
 
     return (
-      <Segment clearing>
+      <Segment clearing style={{background: "#292354", color: "white"}}>
         {/* Channel Title */}
         <Header fluid="true" as="h2" floated="left" style={{ marginBottom: 0 }}>
-          <span>
+          <span style={{ color: "white" }}>
             {channelName}
             {!isPrivateChannel && (
               <Icon
                 onClick={handleStar}
                 name={isChannelStarred ? "star" : "star outline"}
-                color={isChannelStarred ? "yellow" : "black"}
+                color={isChannelStarred ? "yellow" : "white"}
               />
             )}
           </span>
-          <Header.Subheader>{numUniqueUsers}</Header.Subheader>
+          <Header.Subheader  style={{ color: "white" }}>{numUniqueUsers}</Header.Subheader>
         </Header>
 
         {/* Channel Search Input */}

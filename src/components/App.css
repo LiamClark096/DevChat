@@ -10,13 +10,23 @@ body,
 .menu {
   padding-bottom: 2em;
 }
+.ui.grid {
+  background: #120e28 !important;
+  /* background: #814bf6!important; */
+}
+.ui.segment {
+  background: rgb(38 38 38);
+}
 
 /* Messages.js */
 .messages {
   height: 62vh;
   overflow-y: scroll;
-  margin: 0!important;
-  max-width: 100%!important;
+  margin: 0 !important;
+  max-width: 100% !important;
+}
+.boxcolor {
+  background-color: #292354!important;
 }
 
 /* MessageForm.js */

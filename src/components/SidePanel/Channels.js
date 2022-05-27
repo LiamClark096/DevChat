@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { setCurrentChannel, setPrivateChannel } from "../../actions";
 // prettier-ignore
 import { Menu, Icon, Modal, Form, Input, Button, Label } from "semantic-ui-react";
-import Notifier from "react-desktop-notification";
 class Channels extends React.Component {
   state = {
     activeChannel: "",
@@ -175,10 +174,6 @@ class Channels extends React.Component {
     });
 
     if (count > 0) {
-      Notifier.focus(
-        channel.name,
-        "New message",
-      );
       return count;
     }
   };

@@ -35,8 +35,8 @@ const Message = ({ message, user }) => {
       <Comment>
         <Comment.Avatar src={message.user.avatar} />
         <Comment.Content className={isOwnMessage(message, user)}>
-          <Comment.Author as="a">{message.user.name}</Comment.Author>
-          <Comment.Metadata>{timeFromNow(message.timestamp)}</Comment.Metadata>
+          <Comment.Author as="a"  style={{ color: "white" }}>{message.user.name}</Comment.Author>
+          <Comment.Metadata  style={{ color: "grey" }}>{timeFromNow(message.timestamp)}</Comment.Metadata>
           {isImage(message) ? (
             <Image
               src={message.image}
@@ -44,7 +44,7 @@ const Message = ({ message, user }) => {
               onClick={() => setOpen(!open)}
             />
           ) : (
-            <Comment.Text>{generate(message.content)}</Comment.Text>
+            <Comment.Text  style={{ color: "white" }}>{generate(message.content)}</Comment.Text>
           )}
         </Comment.Content>
       </Comment>

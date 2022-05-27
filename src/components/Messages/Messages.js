@@ -289,7 +289,7 @@ class Messages extends React.Component {
           isChannelStarred={isChannelStarred}
         />
 
-        <Segment>
+        <Segment className="boxcolor">
           <Comment.Group className="messages">
             {this.displayMessageSkeleton(messagesLoading)}
             {searchTerm
