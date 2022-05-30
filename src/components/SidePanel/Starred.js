@@ -2,7 +2,7 @@ import React from "react";
 import firebase from "../../firebase";
 import { connect } from "react-redux";
 import { setCurrentChannel, setPrivateChannel } from "../../actions";
-import { Menu, Icon } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 
 class Starred extends React.Component {
   state = {

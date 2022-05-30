@@ -199,7 +199,7 @@ class MessageForm extends React.Component {
 
   render() {
     // prettier-ignore
-    const { errors, message, loading, modal, uploadState, percentUploaded, emojiPicker } = this.state;
+    const { errors, message, modal, uploadState, percentUploaded, emojiPicker } = this.state;
 
     return (
       <Segment className="message__form boxcolor">

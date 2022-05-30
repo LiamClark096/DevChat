@@ -15,6 +15,7 @@ const timeFromNow = (timestamp) => moment(timestamp).fromNow();
 
 const generate = (msg) => {
   var expression =
+  // eslint-disable-next-line
     /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
   var regex = new RegExp(expression);
   if (msg.match(regex)) {

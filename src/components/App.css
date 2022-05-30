@@ -2,8 +2,8 @@ html,
 body,
 .app {
   height: 100vh;
-  background: #eee;
-  padding: 1em;
+  background: #120e28;
+  padding: 1rem;
 }
 body {
   overflow: hidden !important;
@@ -33,6 +33,9 @@ ul {
   display: flex;
   flex-grow: 2;
 }
+.ui.red.label {
+  margin-right: 5px !important;
+}
 
 /* SidePanel.js */
 .sideBar {
@@ -55,6 +58,27 @@ ul {
 }
 .ui.segment {
   background: rgb(38 38 38);
+}
+.ui.styled.accordion {
+  margin-top: 10px !important;
+  border-radius: 8px !important;
+  color: white !important;
+  background-color: #292354 !important;
+}
+.ui.attached.header {
+  border-radius: 8px !important;
+  background-color: #292354 !important;
+  border: 1px solid #292354 !important;
+}
+.active.title,
+.accordion > .title,
+.content > .header,
+.content > .description,
+.attached.header {
+  color: white !important;
+}
+.accordion >.list{
+  margin-left: 2rem;
 }
 
 /* Messages.js */
