@@ -55,6 +55,7 @@ ul {
 }
 .ui.grid {
   background: #120e28 !important;
+  padding: 1rem;
 }
 .ui.segment {
   background: rgb(38 38 38);
@@ -77,16 +78,24 @@ ul {
 .attached.header {
   color: white !important;
 }
-.accordion >.list{
+.accordion > .list {
   margin-left: 2rem;
 }
 
 /* Messages.js */
 .messages {
-  height: 75vh;
+  height: 72vh;
   overflow-y: scroll;
   margin: 0 !important;
   max-width: 100% !important;
+}
+.noMessages {
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  padding: 2rem;
+  letter-spacing: 3px;
 }
 .boxcolor {
   background-color: #292354 !important;

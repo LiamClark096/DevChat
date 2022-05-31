@@ -276,6 +276,7 @@ class Messages extends React.Component {
   render() {
     // prettier-ignore
     const { messagesRef, messages, channel, user, numUniqueUsers, searchTerm, searchResults, searchLoading, privateChannel, isChannelStarred, typingUsers, messagesLoading } = this.state;
+    console.log("messages :", messages);
 
     return (
       <React.Fragment>
@@ -291,7 +292,8 @@ class Messages extends React.Component {
 
         <Segment className="boxcolor">
           <Comment.Group className="messages">
-            {this.displayMessageSkeleton(messagesLoading)}
+            {messages.length > 0 ? this.displayMessageSkeleton(messagesLoading) : <p className="noMessages">No messages here! Write your first message!</p>}
+
             {searchTerm
               ? this.displayMessages(searchResults)
               : this.displayMessages(messages)}
