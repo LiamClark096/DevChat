@@ -1,13 +1,13 @@
 import React from "react";
-import firebase from "../../firebase";
 import { connect } from "react-redux";
 import { setCurrentChannel, setPrivateChannel } from "../../actions";
 import { Icon } from "semantic-ui-react";
+import { getDatabase } from "firebase/database";
 
 class Starred extends React.Component {
   state = {
     user: this.props.currentUser,
-    usersRef: firebase.database().ref("users"),
+    usersRef: getDatabase("users"),
     activeChannel: "",
     starredChannels: [],
   };

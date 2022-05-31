@@ -1,5 +1,5 @@
 import React from "react";
-import firebase from "../../firebase";
+import {getAuth} from "firebase/auth";
 import {
   Grid,
   Form,
@@ -30,8 +30,7 @@ class Login extends React.Component {
     event.preventDefault();
     if (this.isFormValid(this.state)) {
       this.setState({ errors: [], loading: true });
-      firebase
-        .auth()
+      getAuth()
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(signedInUser => {
           console.log(signedInUser);

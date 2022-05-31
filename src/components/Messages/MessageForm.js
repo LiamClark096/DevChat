@@ -7,11 +7,13 @@ import "emoji-mart/css/emoji-mart.css";
 
 import FileModal from "./FileModal";
 import ProgressBar from "./ProgressBar";
+import { getStorage } from "firebase/storage";
+import { getDatabase } from "firebase/database";
 
 class MessageForm extends React.Component {
   state = {
-    storageRef: firebase.storage().ref(),
-    typingRef: firebase.database().ref("typing"),
+    storageRef: getStorage(),
+    typingRef: getDatabase("typing"),
     uploadTask: null,
     uploadState: "",
     percentUploaded: 0,

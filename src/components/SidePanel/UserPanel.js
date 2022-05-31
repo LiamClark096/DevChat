@@ -1,8 +1,10 @@
 import React from "react";
-import firebase from "../../firebase";
 import AvatarEditor from "react-avatar-editor";
 // prettier-ignore
 import { Grid, Header, Icon, Dropdown, Image, Modal, Input, Button } from "semantic-ui-react";
+import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
+import { getDatabase } from "firebase/database";
 
 class UserPanel extends React.Component {
   state = {
@@ -12,12 +14,12 @@ class UserPanel extends React.Component {
     croppedImage: "",
     blob: null,
     uploadedCroppedImage: "",
-    storageRef: firebase.storage().ref(),
-    userRef: firebase.auth().currentUser,
-    usersRef: firebase.database().ref("users"),
+    storageRef: getStorage(),
+    userRef: getAuth().currentUser,
+    usersRef: getDatabase("users"),
     metadata: {
-      contentType: "image/jpeg"
-    }
+      contentType: "image/jpeg",
+    },
   };
 
   openModal = () => this.setState({ modal: true });
@@ -32,16 +34,16 @@ class UserPanel extends React.Component {
           Signed in as <strong>{this.state.user.displayName}</strong>
         </span>
       ),
-      disabled: true
+      disabled: true,
     },
     {
       key: "avatar",
-      text: <span onClick={this.openModal}>Change Avatar</span>
+      text: <span onClick={this.openModal}>Change Avatar</span>,
     },
     {
       key: "signout",
-      text: <span onClick={this.handleSignout}>Sign Out</span>
-    }
+      text: <span onClick={this.handleSignout}>Sign Out</span>,
+    },
   ];
 
   uploadCroppedImage = () => {
@@ -50,8 +52,8 @@ class UserPanel extends React.Component {
     storageRef
       .child(`avatars/users/${userRef.uid}`)
       .put(blob, metadata)
-      .then(snap => {
-        snap.ref.getDownloadURL().then(downloadURL => {
+      .then((snap) => {
+        snap.ref.getDownloadURL().then((downloadURL) => {
           this.setState({ uploadedCroppedImage: downloadURL }, () =>
             this.changeAvatar()
           );
@@ -62,13 +64,13 @@ class UserPanel extends React.Component {
   changeAvatar = () => {
     this.state.userRef
       .updateProfile({
-        photoURL: this.state.uploadedCroppedImage
+        photoURL: this.state.uploadedCroppedImage,
       })
       .then(() => {
         console.log("PhotoURL updated");
         this.closeModal();
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
 
@@ -78,12 +80,12 @@ class UserPanel extends React.Component {
       .then(() => {
         console.log("User avatar updated");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 
@@ -97,19 +99,18 @@ class UserPanel extends React.Component {
 
   handleCropImage = () => {
     if (this.avatarEditor) {
-      this.avatarEditor.getImageScaledToCanvas().toBlob(blob => {
+      this.avatarEditor.getImageScaledToCanvas().toBlob((blob) => {
         let imageUrl = URL.createObjectURL(blob);
         this.setState({
           croppedImage: imageUrl,
-          blob
+          blob,
         });
       });
     }
   };
 
   handleSignout = () => {
-    firebase
-      .auth()
+    getAuth()
       .signOut()
       .then(() => console.log("signed out!"));
   };
@@ -158,7 +159,7 @@ class UserPanel extends React.Component {
                   <Grid.Column className="ui center aligned grid">
                     {previewImage && (
                       <AvatarEditor
-                        ref={node => (this.avatarEditor = node)}
+                        ref={(node) => (this.avatarEditor = node)}
                         image={previewImage}
                         width={120}
                         height={120}

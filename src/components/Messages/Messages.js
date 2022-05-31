@@ -2,32 +2,32 @@ import React from "react";
 import { Segment, Comment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { setUserPosts } from "../../actions";
-import firebase from "../../firebase";
 
 import MessagesHeader from "./MessagesHeader";
 import MessageForm from "./MessageForm";
 import Message from "./Message";
 import Typing from "./Typing";
 import Skeleton from "./Skeleton";
+import { getDatabase } from "firebase/database";
 
 class Messages extends React.Component {
   state = {
     privateChannel: this.props.isPrivateChannel,
-    privateMessagesRef: firebase.database().ref("privateMessages"),
-    messagesRef: firebase.database().ref("messages"),
+    privateMessagesRef: getDatabase("privateMessages"),
+    messagesRef: getDatabase("messages"),
     messages: [],
     messagesLoading: true,
     channel: this.props.currentChannel,
     isChannelStarred: false,
     user: this.props.currentUser,
-    usersRef: firebase.database().ref("users"),
+    usersRef: getDatabase("users"),
     numUniqueUsers: "",
     searchTerm: "",
     searchLoading: false,
     searchResults: [],
-    typingRef: firebase.database().ref("typing"),
+    typingRef: getDatabase("typing"),
     typingUsers: [],
-    connectedRef: firebase.database().ref(".info/connected"),
+    connectedRef: getDatabase(".info/connected"),
     listeners: [],
   };
 

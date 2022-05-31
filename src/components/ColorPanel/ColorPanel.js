@@ -1,10 +1,10 @@
 import React from "react";
-import firebase from "../../firebase";
 import { connect } from "react-redux";
 import { setColors } from "../../actions";
 // prettier-ignore
 import { Sidebar, Menu, Divider, Button, Modal, Icon, Label, Segment } from "semantic-ui-react";
 import { SliderPicker } from "react-color";
+import { getDatabase } from "firebase/database";
 
 class ColorPanel extends React.Component {
   state = {
@@ -12,7 +12,7 @@ class ColorPanel extends React.Component {
     primary: "",
     secondary: "",
     user: this.props.currentUser,
-    usersRef: firebase.database().ref("users"),
+    usersRef: getDatabase("users"),
     userColors: []
   };
 

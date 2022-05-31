@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid } from "semantic-ui-react";
 import "./App.css";
 import { connect } from "react-redux";
@@ -7,10 +7,48 @@ import { connect } from "react-redux";
 import SidePanel from "./SidePanel/SidePanel";
 import Messages from "./Messages/Messages";
 import MetaPanel from "./MetaPanel/MetaPanel";
+import _firebase from "../firebase";
+import { Button, Toast } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // prettier-ignore
-const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, secondaryColor }) => (
-  <Grid columns="equal" className="app" style={{ background: secondaryColor }}>
+function App({ currentUser, currentChannel, isPrivateChannel, userPosts, secondaryColor }){
+  const [show, setShow] = useState(false);
+  const [notification, setNotification] = useState({title: '', body: ''});
+  const [isTokenFound, setTokenFound] = useState(false);
+  _firebase.fetchToken(setTokenFound);
+
+  _firebase.onMessageListener().then(payload => {
+    setNotification({title: payload.notification.title, body: payload.notification.body})
+    setShow(true);
+    console.log(payload);
+  }).catch(err => console.log('failed: ', err));
+
+  const onShowNotificationClicked = () => {
+    setNotification({title: "Notification", body: "This is a test notification"})
+    setShow(true);
+  }
+
+ return ( 
+   <React.Fragment>
+     <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide animation style={{
+          position: 'absolute',
+          top: 20,
+          right: 20,
+          minWidth: 200
+        }}>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded mr-2"
+              alt=""
+            />
+            <strong className="mr-auto">{notification.title}</strong>
+            <small>just now</small>
+          </Toast.Header>
+          <Toast.Body>{notification.body}</Toast.Body>
+        </Toast>
+ <Grid columns="equal" className="app" style={{ background: secondaryColor }}>
     {/* <ColorPanel
       key={currentUser && currentUser.name}
       currentUser={currentUser}
@@ -39,15 +77,19 @@ const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, seconda
       />
     </Grid.Column>
   </Grid>
-);
+  <Button onClick={() => onShowNotificationClicked()}>Show Toast</Button>
+   </React.Fragment>
+  )
 
-const mapStateToProps = state => ({
+  }
+
+const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
   currentChannel: state.channel.currentChannel,
   isPrivateChannel: state.channel.isPrivateChannel,
   userPosts: state.channel.userPosts,
   primaryColor: state.colors.primaryColor,
-  secondaryColor: state.colors.secondaryColor
+  secondaryColor: state.colors.secondaryColor,
 });
 
 export default connect(mapStateToProps)(App);
