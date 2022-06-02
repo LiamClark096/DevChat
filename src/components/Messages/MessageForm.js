@@ -5,8 +5,8 @@ import { Segment, Button, Input } from "semantic-ui-react";
 import { Picker, emojiIndex } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 
-import FileModal from "./FileModal";
 import ProgressBar from "./ProgressBar";
+import FileUpload from "../../partials/FileUpload";
 
 class MessageForm extends React.Component {
   state = {
@@ -20,7 +20,6 @@ class MessageForm extends React.Component {
     user: this.props.currentUser,
     loading: false,
     errors: [],
-    modal: false,
     emojiPicker: false,
   };
 
@@ -30,10 +29,6 @@ class MessageForm extends React.Component {
       this.setState({ uploadTask: null });
     }
   }
-
-  openModal = () => this.setState({ modal: true });
-
-  closeModal = () => this.setState({ modal: false });
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -196,10 +191,10 @@ class MessageForm extends React.Component {
         });
       });
   };
-
+  
   render() {
     // prettier-ignore
-    const { errors, message, modal, uploadState, percentUploaded, emojiPicker } = this.state;
+    const { errors, message, uploadState, percentUploaded, emojiPicker } = this.state;
 
     return (
       <Segment className="message__form boxcolor">
@@ -236,20 +231,8 @@ class MessageForm extends React.Component {
             }
             placeholder="Write your message"
           />
-          <Button
-            color="teal"
-            disabled={uploadState === "uploading"}
-            onClick={this.openModal}
-            content="Upload Media"
-            labelPosition="right"
-            icon="cloud upload"
-          />
+          <FileUpload uploadFile={this.uploadFile} disabled={uploadState === "uploading"}/>
         </div>
-        <FileModal
-          modal={modal}
-          closeModal={this.closeModal}
-          uploadFile={this.uploadFile}
-        />
         <ProgressBar
           uploadState={uploadState}
           percentUploaded={percentUploaded}
