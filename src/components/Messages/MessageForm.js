@@ -31,17 +31,18 @@ class MessageForm extends React.Component {
   }
 
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+      this.setState({ [event.target.name]: event.target.value });
   };
 
   handleKeyDown = (event) => {
+    const { message, typingRef, channel, user } = this.state;
+    
     if (event.ctrlKey && event.keyCode === 13) {
       this.sendMessage();
     } else if (event.keyCode === 13) {
       this.sendMessage();
     }
 
-    const { message, typingRef, channel, user } = this.state;
 
     if (message) {
       typingRef.child(channel.id).child(user.uid).set(user.displayName);
@@ -97,7 +98,7 @@ class MessageForm extends React.Component {
     const { getMessagesRef } = this.props;
     const { message, channel, user, typingRef } = this.state;
 
-    if (message) {
+    if (message.trim() !== "") {
       this.setState({ loading: true });
       getMessagesRef()
         .child(channel.id)
@@ -118,6 +119,7 @@ class MessageForm extends React.Component {
       this.setState({
         errors: this.state.errors.concat({ message: "Add a message" }),
       });
+      alert("No message! Plase add a message before send.")
     }
   };
 
@@ -191,7 +193,7 @@ class MessageForm extends React.Component {
         });
       });
   };
-  
+
   render() {
     // prettier-ignore
     const { errors, message, uploadState, percentUploaded, emojiPicker } = this.state;
@@ -209,7 +211,6 @@ class MessageForm extends React.Component {
         )}
         <div className="message_form">
           <Input
-            fluid
             name="message"
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
@@ -224,14 +225,18 @@ class MessageForm extends React.Component {
               />
             }
             labelPosition="left"
-            className={
-              errors.some((error) => error.message.includes("message"))
-                ? "error"
-                : "msg_input"
-            }
+            className="msg_input"
+            // className={
+            //   errors.some((error) => error.message.includes("message"))
+            //     ? "error"
+            //     : "msg_input"
+            // }
             placeholder="Write your message"
           />
-          <FileUpload uploadFile={this.uploadFile} disabled={uploadState === "uploading"}/>
+          <FileUpload
+            uploadFile={this.uploadFile}
+            disabled={uploadState === "uploading"}
+          />
         </div>
         <ProgressBar
           uploadState={uploadState}
