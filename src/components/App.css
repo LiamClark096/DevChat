@@ -109,7 +109,16 @@ ul {
   z-index: 200;
 }
 
-
+@media only screen and (min-width: 1920px) {
+  .ui.modal {
+    width: 75%!important;
+    margin: 0;
+  }
+}
+.ui.modal>.content{
+  display: flex!important;
+  padding: 0!important;
+}
 .emoijpicker {
   position: absolute;
 }
@@ -149,7 +158,7 @@ ul {
   width: 200px;
 }
 .img_prev {
-  max-width: 25rem !important;
+  max-width: 75vw !important;
   margin-left: auto;
   margin-right: auto;
 }

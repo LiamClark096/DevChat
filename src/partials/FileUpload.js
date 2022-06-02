@@ -17,7 +17,6 @@ export default function FileUpload({ uploadFile }) {
     if (file !== null) {
       if (isAuthorized(file.name)) {
         const metadata = { contentType: mime.lookup(file.name) };
-        console.log('metadata :', metadata);
         uploadFile(file, metadata);
         clearFile();
       }

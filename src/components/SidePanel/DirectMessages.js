@@ -103,7 +103,6 @@ class DirectMessages extends React.Component {
 
   render() {
     const { users, activeChannel } = this.state;
-    console.log('users :', users);
 
     return (
       <React.Fragment>
