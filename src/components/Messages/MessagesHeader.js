@@ -10,11 +10,11 @@ class MessagesHeader extends React.Component {
       searchLoading,
       isPrivateChannel,
       handleStar,
-      isChannelStarred
+      isChannelStarred,
     } = this.props;
 
     return (
-      <Segment clearing style={{background: "#292354", color: "white"}}>
+      <Segment clearing style={{ background: "#292354", color: "white" }}>
         {/* Channel Title */}
         <Header fluid="true" as="h2" floated="left" style={{ marginBottom: 0 }}>
           <span style={{ color: "white" }}>
@@ -27,7 +27,9 @@ class MessagesHeader extends React.Component {
               />
             )}
           </span>
-          <Header.Subheader  style={{ color: "white" }}>{numUniqueUsers}</Header.Subheader>
+          <Header.Subheader style={{ color: "white" }}>
+            {numUniqueUsers}
+          </Header.Subheader>
         </Header>
 
         {/* Channel Search Input */}

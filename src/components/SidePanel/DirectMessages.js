@@ -103,6 +103,7 @@ class DirectMessages extends React.Component {
 
   render() {
     const { users, activeChannel } = this.state;
+    console.log('users :', users);
 
     return (
       <React.Fragment>
@@ -119,15 +120,14 @@ class DirectMessages extends React.Component {
               active={user.uid === activeChannel}
               onClick={() => this.changeChannel(user)}
               style={{ opacity: 0.7, fontStyle: "italic" }}
-              className={
-                user.uid === this.state.activeChannel ? "activeMsg" : ""
+              className={`directMessages ${user.uid === this.state.activeChannel ? "activeMsg" : ""}`
               }
             >
+              <img src={user.avatar} className="userAvatar"/> {user.name}
               <Icon
                 name="circle"
                 color={this.isUserOnline(user) ? "green" : "red"}
               />
-              @ {user.name}
             </li>
           ))}
         </ul>

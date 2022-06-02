@@ -50,8 +50,9 @@ ul {
   margin: 0;
 }
 .menu li {
-  margin: 1rem 0;
+  margin: 10px 0;
   cursor: pointer;
+  padding: 5px;
 }
 .ui.grid {
   background: #120e28 !important;
@@ -108,6 +109,7 @@ ul {
   z-index: 200;
 }
 
+
 .emoijpicker {
   position: absolute;
 }
@@ -130,7 +132,18 @@ ul {
   border: 1px solid rgba(34, 36, 38, 0.15);
 }
 
-
+.userAvatar {
+  width: 30px;
+  margin-right: 5px;
+  border-radius: 8px;
+}
+.directMessages {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 150px;
+  padding: 5px;
+}
 .message__image {
   padding: 1em;
   width: 200px;

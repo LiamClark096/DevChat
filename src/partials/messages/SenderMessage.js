@@ -27,6 +27,9 @@ const SenderMessage = ({ message, imgPrev = () => {} }) => {
   };
   return (
     <div className="sendermessage">
+      <span>
+        {message.user.name} ({timeFromNow(message.timestamp)})
+      </span>
       {isImage(message) ? (
         <img
           src={message.image}
@@ -36,10 +39,6 @@ const SenderMessage = ({ message, imgPrev = () => {} }) => {
       ) : (
         <p>{generate(message.content)}</p>
       )}
-
-      <span>
-        {message.user.name} - {timeFromNow(message.timestamp)}
-      </span>
     </div>
   );
 };
