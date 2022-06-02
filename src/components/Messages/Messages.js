@@ -1,5 +1,4 @@
 import React from "react";
-import { Segment, Comment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { setUserPosts } from "../../actions";
 import firebase from "../../firebase";
@@ -276,7 +275,6 @@ class Messages extends React.Component {
   render() {
     // prettier-ignore
     const { messagesRef, messages, channel, user, numUniqueUsers, searchTerm, searchResults, searchLoading, privateChannel, isChannelStarred, typingUsers, messagesLoading } = this.state;
-    console.log("messages :", messages);
 
     return (
       <React.Fragment>
@@ -290,17 +288,21 @@ class Messages extends React.Component {
           isChannelStarred={isChannelStarred}
         />
 
-        <Segment className="boxcolor">
-          <Comment.Group className="messages">
-            {messages.length > 0 ? this.displayMessageSkeleton(messagesLoading) : <p className="noMessages">No messages here! Write your first message!</p>}
+        <div className="messagesContainer">
+          {messages.length > 0 ? (
+            this.displayMessageSkeleton(messagesLoading)
+          ) : (
+            <p className="noMessages">
+              No messages here! Write your first message!
+            </p>
+          )}
 
-            {searchTerm
-              ? this.displayMessages(searchResults)
-              : this.displayMessages(messages)}
-            {this.displayTypingUsers(typingUsers)}
-            <div ref={(node) => (this.messagesEnd = node)} />
-          </Comment.Group>
-        </Segment>
+          {searchTerm
+            ? this.displayMessages(searchResults)
+            : this.displayMessages(messages)}
+          {this.displayTypingUsers(typingUsers)}
+          <div ref={(node) => (this.messagesEnd = node)} />
+        </div>
 
         <MessageForm
           messagesRef={messagesRef}
