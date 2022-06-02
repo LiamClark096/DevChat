@@ -296,3 +296,13 @@ ul {
   /* content: "\f5fc"; computer icon */
   content: "\f093";
 }
+.previewCloseBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 7px !important;
+  border-radius: 20px !important;
+  width: 25px;
+  height: 25px;
+  margin: 0 !important;
+}

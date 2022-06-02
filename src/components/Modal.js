@@ -10,12 +10,10 @@ class UserModal extends React.Component {
         <Modal.Header>{title || ""}</Modal.Header>
         <Modal.Content>
           <Image src={img} className="img_prev"/>
-        </Modal.Content>
-        <Modal.Actions>
-          <Button color="red" inverted onClick={closeModal}>
-            <Icon name="remove" /> Bezár
+          <Button className="previewCloseBtn" color="red" inverted onClick={closeModal}>
+            <Icon name="remove" />
           </Button>
-        </Modal.Actions>
+        </Modal.Content>
       </Modal>
     );
   }
