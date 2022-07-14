@@ -1,5 +1,4 @@
 import React from "react";
-import firebase from "../../firebase";
 import md5 from "md5";
 import {
   Grid,
@@ -11,6 +10,8 @@ import {
   Icon
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { getDatabase } from "firebase/database";
+import { getAuth } from "firebase/auth";
 
 class Register extends React.Component {
   state = {
@@ -20,9 +21,9 @@ class Register extends React.Component {
     passwordConfirmation: "",
     errors: [],
     loading: false,
-    usersRef: firebase.database().ref("users")
+    usersRef: getDatabase().ref("users")
   };
-
+ 
   isFormValid = () => {
     let errors = [];
     let error;
@@ -70,8 +71,7 @@ class Register extends React.Component {
     event.preventDefault();
     if (this.isFormValid()) {
       this.setState({ errors: [], loading: true });
-      firebase
-        .auth()
+      getAuth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(createdUser => {
           console.log(createdUser);

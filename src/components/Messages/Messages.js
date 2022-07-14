@@ -2,7 +2,8 @@ import React from "react";
 import { Segment, Comment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { setUserPosts } from "../../actions";
-import firebase from "../../firebase";
+import { requestForToken } from "../../firebase";
+import { getDatabase } from "firebase/database";
 
 import MessagesHeader from "./MessagesHeader";
 import MessageForm from "./MessageForm";
@@ -13,21 +14,21 @@ import Skeleton from "./Skeleton";
 class Messages extends React.Component {
   state = {
     privateChannel: this.props.isPrivateChannel,
-    privateMessagesRef: firebase.database().ref("privateMessages"),
-    messagesRef: firebase.database().ref("messages"),
+    privateMessagesRef: getDatabase().ref("privateMessages"),
+    messagesRef: getDatabase().ref("messages"),
     messages: [],
     messagesLoading: true,
     channel: this.props.currentChannel,
     isChannelStarred: false,
     user: this.props.currentUser,
-    usersRef: firebase.database().ref("users"),
+    usersRef: getDatabase().ref("users"),
     numUniqueUsers: "",
     searchTerm: "",
     searchLoading: false,
     searchResults: [],
-    typingRef: firebase.database().ref("typing"),
+    typingRef: getDatabase().ref("typing"),
     typingUsers: [],
-    connectedRef: firebase.database().ref(".info/connected"),
+    connectedRef: getDatabase().ref(".info/connected"),
     listeners: [],
   };
 
@@ -117,10 +118,15 @@ class Messages extends React.Component {
     });
   };
 
+  Notification = () => {
+    requestForToken();
+  };
+
   addMessageListener = (channelId) => {
     let loadedMessages = [];
     const ref = this.getMessagesRef();
     ref.child(channelId).on("child_added", (snap) => {
+      console.log("snap :", snap);
       loadedMessages.push(snap.val());
       this.setState({
         messages: loadedMessages,

@@ -5,7 +5,7 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Spinner from "./Spinner";
 import registerServiceWorker from "./registerServiceWorker";
-import firebase from "./firebase";
+import { getAuth } from "firebase/auth";
 
 import "semantic-ui-css/semantic.min.css";
 
@@ -13,7 +13,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  withRouter
+  withRouter,
 } from "react-router-dom";
 
 import { createStore } from "redux";
@@ -26,7 +26,7 @@ const store = createStore(rootReducer, composeWithDevTools());
 
 class Root extends React.Component {
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
+    getAuth().onAuthStateChanged((user) => {
       if (user) {
         // console.log(user);
         this.props.setUser(user);
@@ -51,15 +51,12 @@ class Root extends React.Component {
   }
 }
 
-const mapStateFromProps = state => ({
-  isLoading: state.user.isLoading
+const mapStateFromProps = (state) => ({
+  isLoading: state.user.isLoading,
 });
 
 const RootWithAuth = withRouter(
-  connect(
-    mapStateFromProps,
-    { setUser, clearUser }
-  )(Root)
+  connect(mapStateFromProps, { setUser, clearUser })(Root)
 );
 
 ReactDOM.render(

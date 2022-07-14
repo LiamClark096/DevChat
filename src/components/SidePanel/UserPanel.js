@@ -1,8 +1,10 @@
 import React from "react";
-import firebase from "../../firebase";
 import AvatarEditor from "react-avatar-editor";
 // prettier-ignore
 import { Grid, Header, Icon, Dropdown, Image, Modal, Input, Button } from "semantic-ui-react";
+import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
+import { getStorage } from "firebase/storage";
 
 class UserPanel extends React.Component {
   state = {
@@ -12,9 +14,9 @@ class UserPanel extends React.Component {
     croppedImage: "",
     blob: null,
     uploadedCroppedImage: "",
-    storageRef: firebase.storage().ref(),
-    userRef: firebase.auth().currentUser,
-    usersRef: firebase.database().ref("users"),
+    storageRef: getStorage().ref(),
+    userRef: getAuth().currentUser,
+    usersRef: getDatabase().ref("users"),
     metadata: {
       contentType: "image/jpeg"
     }
@@ -108,8 +110,7 @@ class UserPanel extends React.Component {
   };
 
   handleSignout = () => {
-    firebase
-      .auth()
+    getAuth()
       .signOut()
       .then(() => console.log("signed out!"));
   };

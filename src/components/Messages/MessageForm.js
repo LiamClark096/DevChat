@@ -1,6 +1,7 @@
 import React from "react";
 import uuidv4 from "uuid/v4";
-import firebase from "../../firebase";
+import { getStorage } from "firebase/storage";
+import { getDatabase } from "firebase/database";
 import { Segment, Button, Input } from "semantic-ui-react";
 import { Picker, emojiIndex } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
@@ -10,8 +11,8 @@ import ProgressBar from "./ProgressBar";
 
 class MessageForm extends React.Component {
   state = {
-    storageRef: firebase.storage().ref(),
-    typingRef: firebase.database().ref("typing"),
+    storageRef: getStorage().ref(),
+    typingRef: getDatabase().ref("typing"),
     uploadTask: null,
     uploadState: "",
     percentUploaded: 0,
@@ -83,7 +84,7 @@ class MessageForm extends React.Component {
 
   createMessage = (fileUrl = null) => {
     const message = {
-      timestamp: firebase.database.ServerValue.TIMESTAMP,
+      timestamp: getDatabase().ServerValue.TIMESTAMP,
       user: {
         id: this.state.user.uid,
         name: this.state.user.displayName,

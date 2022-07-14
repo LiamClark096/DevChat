@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import SidePanel from "./SidePanel/SidePanel";
 import Messages from "./Messages/Messages";
 import MetaPanel from "./MetaPanel/MetaPanel";
+import Notification from "../notifications/Notification";
 
 // prettier-ignore
 const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, secondaryColor }) => (
@@ -38,6 +39,7 @@ const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, seconda
         isPrivateChannel={isPrivateChannel}
       />
     </Grid.Column>
+    <Notification />
   </Grid>
 );
 

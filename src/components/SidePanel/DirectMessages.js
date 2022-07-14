@@ -1,17 +1,17 @@
 import React from "react";
-import firebase from "../../firebase";
 import { connect } from "react-redux";
 import { setCurrentChannel, setPrivateChannel } from "../../actions";
 import { Menu, Icon } from "semantic-ui-react";
+import { getDatabase } from "firebase/database";
 
 class DirectMessages extends React.Component {
   state = {
     activeChannel: "",
     user: this.props.currentUser,
     users: [],
-    usersRef: firebase.database().ref("users"),
-    connectedRef: firebase.database().ref(".info/connected"),
-    presenceRef: firebase.database().ref("presence"),
+    usersRef: getDatabase().ref("users"),
+    connectedRef: getDatabase().ref(".info/connected"),
+    presenceRef: getDatabase().ref("presence"),
   };
 
   componentDidMount() {
