@@ -155,7 +155,8 @@ ul {
 }
 .message__image {
   padding: 1em;
-  width: 200px;
+  max-width: 200px;
+  width: auto;
 }
 .img_prev {
   max-width: 75vw !important;

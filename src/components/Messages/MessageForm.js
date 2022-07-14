@@ -31,18 +31,22 @@ class MessageForm extends React.Component {
   }
 
   handleChange = (event) => {
-      this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleKeyDown = (event) => {
     const { message, typingRef, channel, user } = this.state;
-    
+
     if (event.ctrlKey && event.keyCode === 13) {
       this.sendMessage();
     } else if (event.keyCode === 13) {
       this.sendMessage();
+    } else if (event.ctrlKey && event.keyCode === 86) {
+      // Ctrl + V (86KeyCode)
+      alert("CTRL+V Pressed");
+      var items = event.clipboardData.items;
+      console.log("items :", items);
     }
-
 
     if (message) {
       typingRef.child(channel.id).child(user.uid).set(user.displayName);
@@ -119,7 +123,7 @@ class MessageForm extends React.Component {
       this.setState({
         errors: this.state.errors.concat({ message: "Add a message" }),
       });
-      alert("No message! Plase add a message before send.")
+      alert("No message! Plase add a message before send.");
     }
   };
 
