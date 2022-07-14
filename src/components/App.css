@@ -111,13 +111,13 @@ ul {
 
 @media only screen and (min-width: 1920px) {
   .ui.modal {
-    width: 75%!important;
+    width: 75% !important;
     margin: 0;
   }
 }
-.ui.modal>.content{
-  display: flex!important;
-  padding: 0!important;
+.ui.modal > .content {
+  display: flex !important;
+  padding: 0 !important;
 }
 .emoijpicker {
   position: absolute;
@@ -340,4 +340,38 @@ ul {
   width: 25px;
   height: 25px;
   margin: 0 !important;
+}
+.mobile-view {
+  display: none;
+}
+@media (max-width: 768px) {
+  .four.wide.column {
+    display: none;
+  }
+  .app {
+    display: none !important;
+  }
+  .mobile-view {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  .mobile-view > .ui.clearing.segment {
+    display: none;
+  }
+  .mobile-view > ul.menu {
+    max-height: 120px;
+    overflow-y: scroll;
+    background-color: #292354;
+    border-bottom: 1px solid white;
+    padding: 0;
+    margin-block-start: 0 !important;
+  }
+  .messagesContainer {
+    height: 55vh !important;
+    flex: auto;
+    overflow: hidden;
+    overflow-y: scroll;
+    margin: 0;
+  }
 }

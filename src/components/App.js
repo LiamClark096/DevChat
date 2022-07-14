@@ -10,7 +10,8 @@ import MetaPanel from "./MetaPanel/MetaPanel";
 
 // prettier-ignore
 const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, secondaryColor }) => (
-  <Grid columns="equal" className="app" style={{ background: secondaryColor }}>
+  <React.Fragment>
+    <Grid columns="equal" className="app" style={{ background: secondaryColor }}>
     {/* <ColorPanel
       key={currentUser && currentUser.name}
       currentUser={currentUser}
@@ -39,15 +40,31 @@ const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, seconda
       />
     </Grid.Column>
   </Grid>
+  <div className="mobile-view" style={{ background: secondaryColor }}>
+  <SidePanel
+      key={currentUser && currentUser.uid}
+      currentUser={currentUser}
+      primaryColor={"#120e28"}
+      mobileView={true}
+    />
+  <Messages
+        key={currentChannel && currentChannel.id}
+        currentChannel={currentChannel}
+        currentUser={currentUser}
+        isPrivateChannel={isPrivateChannel}
+      />
+  </div>
+  </React.Fragment>
+  
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
   currentChannel: state.channel.currentChannel,
   isPrivateChannel: state.channel.isPrivateChannel,
   userPosts: state.channel.userPosts,
   primaryColor: state.colors.primaryColor,
-  secondaryColor: state.colors.secondaryColor
+  secondaryColor: state.colors.secondaryColor,
 });
 
 export default connect(mapStateToProps)(App);
